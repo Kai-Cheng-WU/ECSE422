@@ -7,10 +7,10 @@
 | Kaicheng Wu | 260892789 |
 
 
-Prerequisite:
+## Prerequisite:
 Any version of python
 
-To run the code: \
+## To run the code: 
 python networkDesign.py input_file.txt \
 OR \
-python networkDesign.py input_file.txt
+python3 networkDesign.py input_file.txt
