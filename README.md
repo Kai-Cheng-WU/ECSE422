@@ -9,6 +9,15 @@
 
 ## Prerequisite:
 Any version of python
+### Installation of Python3 for Mac OS Using Homebrew:
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+brew install python 
+ 
+Use the following command to make sure that python is installed: \
+python3 --version
+
+
+
 
 ## To run the code: 
 python networkDesign.py input_file.txt \
