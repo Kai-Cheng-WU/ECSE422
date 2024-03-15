@@ -310,7 +310,5 @@ for option in options:
     reliability = get_reliability(reliability_matrix, option)  # Get reliability of a design choice
     valid = get_valid(option)
 
-option5 = [[True,False,False,False,False,True],[True,False,False,False,False,True],[True,False,False,False,False,True],[True,False,False,False,False,True],[True,False,False,False,False,True]]
-print_matrix(options[1])
-print_output(option5)
+
 
