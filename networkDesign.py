@@ -146,7 +146,7 @@ def get_valid(option):
         current = discovered.get()
         reached.add(current)
         for i in range(len(option)):
-            if option[current][i]:
+            if option[current][i] and i not in reached:
                 discovered.put(i)
         if len(reached) == len(option):
             return True
