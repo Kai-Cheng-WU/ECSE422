@@ -113,12 +113,24 @@ def get_reliability(reliability_matrix, option):
     :param option:
     :return: reliability of an option
     '''
-    reliability = 0
+    ''' reliability = 0
     enumerations = get_enumerations(option) # Can change signature or do another function for this
     for enumeration in enumerations:
         if get_valid(enumeration): # Can change signature or do another function for this
             reliability += get_sub_reliability(enumeration, option) # Can change signature or do another function for this
     return reliability
+    '''
+
+    '''New reliability done by Andrei. We multiply every reliabilities.'''
+    reliability = 1
+    for i in range(len(reliability_matrix)):
+        for j in range(len(reliability_matrix[i])):
+            if option[i][j]:
+                reliability *= reliability_matrix[i][j]
+
+    return reliability
+    
+
 
 # TODO
 def get_valid(option):
