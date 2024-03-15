@@ -143,7 +143,110 @@ def get_valid(option):
     # Check if three true that connects everything, don't accept the triangle loop
     # accept the four true
     # accept the five true
-    #accept the six true
+    # accept the six true
+
+def print_output(option):
+    '''
+    Returns the output of the best option
+    :param option:
+    :return: output
+    '''
+    if len(option[0]) == 4:
+        print("The network looks like this")
+        print(" (Node 1) o               o (Node 2)")
+        print("")
+        print("")
+        print("")
+        print(" (Node 3) o               o (Node 4)")
+
+        if option[0][1]:
+            print("There is a connection between node 1 and node 2")
+        if option[0][2]:
+            print("There is a connection between node 1 and node 3")
+        if option[0][3]:
+            print("There is a connection between node 1 and node 4")
+        if option[1][2]:
+            print("There is a connection between node 2 and node 3")
+        if option[1][3]:
+            print("There is a connection between node 2 and node 4")
+        if option[2][3]:
+            print("There is a connection between node 3 and node 4")
+
+    if len(option[0]) == 5:
+        print("The network looks like this")
+        print(" (Node 1) o               o (Node 2)")
+        print("")
+        print("          (Node 5) o")
+        print("")
+        print(" (Node 3) o               o (Node 4)")
+
+        if option[0][1]:
+            print("There is a connection between node 1 and node 2")
+        if option[0][2]:
+            print("There is a connection between node 1 and node 3")
+        if option[0][3]:
+            print("There is a connection between node 1 and node 4")
+        if option[0][4]:
+            print("There is a connection between node 1 and node 5")
+        if option[1][2]:
+            print("There is a connection between node 2 and node 3")
+        if option[1][3]:
+            print("There is a connection between node 2 and node 4")
+        if option[1][4]:
+            print("There is a connection between node 2 and node 5")
+        if option[2][3]:
+            print("There is a connection between node 3 and node 4")
+        if option[2][4]:
+            print("There is a connection between node 3 and node 5")
+        if option[3][4]:
+            print("There is a connection between node 4 and node 5")
+
+    if len(option[0]) == 6:
+        print("The network looks like this")
+        print("         (Node 1) o              ")
+        print("      ")
+        print(" (Node 2) o               o (Node 6)  ")
+        print("")
+        print(" (Node 3) o               o (Node 5)")
+        print("      ")
+        print("                  o (Node 4)")
+
+        if option[0][1]:
+            print("There is a connection between node 1 and node 2")
+        if option[0][2]:
+            print("There is a connection between node 1 and node 3")
+        if option[0][3]:
+            print("There is a connection between node 1 and node 4")
+        if option[0][4]:
+            print("There is a connection between node 1 and node 5")
+        if option[0][5]:
+            print("There is a connection between node 1 and node 6")
+
+        if option[1][2]:
+            print("There is a connection between node 2 and node 3")
+        if option[1][3]:
+            print("There is a connection between node 2 and node 4")
+        if option[1][4]:
+            print("There is a connection between node 2 and node 5")
+        if option[1][5]:
+            print("There is a connection between node 2 and node 6")
+
+        if option[2][3]:
+            print("There is a connection between node 3 and node 4")
+        if option[2][4]:
+            print("There is a connection between node 3 and node 5")
+        if option[2][5]:
+            print("There is a connection between node 3 and node 6")
+
+        if option[3][4]:
+            print("There is a connection between node 4 and node 5")
+        if option[3][5]:
+            print("There is a connection between node 4 and node 6")
+
+        if option[4][5]:
+            print("There is a connection between node 5 and node 6")
+
+
 
 
 filename = '4_city.txt'
@@ -207,5 +310,7 @@ for option in options:
     reliability = get_reliability(reliability_matrix, option)  # Get reliability of a design choice
     valid = get_valid(option)
 
-
+option5 = [[True,False,False,False,False,True],[True,False,False,False,False,True],[True,False,False,False,False,True],[True,False,False,False,False,True],[True,False,False,False,False,True]]
+print_matrix(options[1])
+print_output(option5)
 
