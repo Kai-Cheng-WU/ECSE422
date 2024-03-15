@@ -129,7 +129,7 @@ def get_reliability(reliability_matrix, option):
                 reliability *= reliability_matrix[i][j]
 
     return reliability
-    
+
 
 
 # TODO
@@ -139,7 +139,12 @@ def get_valid(option):
     :param option:
     :return:
     '''
-    return True
+
+    # Check if three true that connects everything, don't accept the triangle loop
+    # accept the four true
+    # accept the five true
+    #accept the six true
+
 
 filename = '4_city.txt'
 if len(sys.argv) > 2:
