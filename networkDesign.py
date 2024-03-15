@@ -86,7 +86,13 @@ def get_cost(cost_matrix, option):
     :param option:
     :return: the cost as an int
     '''
-    return 0
+    cost_option = 0
+    for i in range(len(cost_matrix)):
+        for j in range(len(cost_matrix[i])):
+            if option[i][j]:
+                cost_option += cost_matrix[i][j]
+
+    return cost_option
 
 
 # TODO
@@ -183,3 +189,6 @@ for option in options:
     cost = get_cost(cost_matrix, option)  # Get the cost of a design choice
     reliability = get_reliability(reliability_matrix, option)  # Get reliability of a design choice
     valid = get_valid(option)
+
+
+
