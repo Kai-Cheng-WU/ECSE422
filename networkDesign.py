@@ -1,4 +1,5 @@
 import sys
+import queue
 
 def get_next_line(f):
     '''
@@ -134,6 +135,24 @@ def get_reliability(reliability_matrix, option):
 
 # TODO
 def get_valid(option):
+    reached = set()
+    discovered = queue.Queue()
+    for i in range(len(option)):
+        if option[0][i]:
+            discovered.put(i)
+            reached.add(0)
+
+    while not discovered.empty():
+        current = discovered.get()
+        reached.add(current)
+        for i in range(len(option)):
+            if option[current][i]:
+                discovered.put(i)
+        if len(reached) == len(option):
+            return True
+
+    return False
+
     '''
     Returns if an option is valid ie possible have all-network reliability > 0
     :param option:
@@ -309,6 +328,8 @@ for option in options:
     cost = get_cost(cost_matrix, option)  # Get the cost of a design choice
     reliability = get_reliability(reliability_matrix, option)  # Get reliability of a design choice
     valid = get_valid(option)
+    print(option)
+    print(valid)
 
 
 
