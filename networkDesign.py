@@ -1,5 +1,6 @@
 import sys
 import queue
+import copy
 
 def get_next_line(f):
     '''
@@ -134,24 +135,37 @@ def get_reliability(reliability_matrix, option):
 
 
 # TODO
+
+def get_graph(option):
+    ### This function takes in an option and computes a graph from it
+    ### The graph is essentially the option itself, but each edge is now bidirectional
+    graph = copy.deepcopy(option)
+    for i in range(len(graph)):
+        for j in range(len(graph[i])):
+            if graph[i][j]:
+                graph[j][i] = True
+    return graph
+
+
 def get_valid(option):
+    graph = get_graph(option)
     reached = set()
     discovered = queue.Queue()
-    for i in range(len(option)):
-        if option[0][i]:
+    for i in range(len(graph)):
+        if graph[0][i]:
             discovered.put(i)
             reached.add(0)
 
     while not discovered.empty():
         current = discovered.get()
         reached.add(current)
-        for i in range(len(option)):
-            if option[current][i] and i not in reached:
+        for i in range(len(graph)):
+            if graph[current][i] and i not in reached:
                 discovered.put(i)
-        if len(reached) == len(option):
-            return True
+        if len(reached) == len(graph):
+            return True, reached
 
-    return False
+    return False,  reached
 
     '''
     Returns if an option is valid ie possible have all-network reliability > 0
@@ -324,12 +338,20 @@ for i in range(num_of_cities - 1, 0, -1):
 options = [make_square_matrix(option, num_of_cities) for option in options]
 # print(len(options))
 
+counter = 0
 for option in options:
     cost = get_cost(cost_matrix, option)  # Get the cost of a design choice
     reliability = get_reliability(reliability_matrix, option)  # Get reliability of a design choice
-    valid = get_valid(option)
-    print(option)
-    print(valid)
+    valid, nodes = get_valid(option)
+    if valid:
+        counter += 1
+        print(f"Valid Option {counter}:")
+        print("Option: " + str(option))
+        print(f"Valid: {valid}")
+        print(f"Nodes: {nodes}")
+        print("\n")
 
+print(f"Found {counter} valid options.")
 
-
+# op = [[None, False, True, True], [None, None, True, True], [None, None, None, True], [None, None, None, None]]
+# print(get_valid(op))
