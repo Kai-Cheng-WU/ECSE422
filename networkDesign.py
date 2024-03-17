@@ -104,15 +104,44 @@ def get_enumerations(option):
 
 # TODO
 # Can change signature
-def get_sub_reliability(enumeration, option):
-    pass
+def get_sub_reliability(reliability_matrix, option):
+    reliability = 1
+    for i in range(len(reliability_matrix)):
+        for j in range(len(reliability_matrix[i])):
+            if option[i][j]:
+                reliability *= reliability_matrix[i][j]
+
+    return reliability
+
+def part_of(subset,option,reliability_matrix):
+    '''
+    Returns (partOf, prob_of_missing edges)
+    First tells us if it is a subset and then the probability of the missing edges so we can quickly multiply
+    :param subset:
+    :param option:
+    :param reliability_matrix:
+    :return:
+    '''
+    rel = 1
+    for i in range(len(reliability_matrix)):
+        for j in range(len(reliability_matrix[i])):
+            if subset[i][j] == option[i][j]: # If both are true or both false
+                pass
+            if subset[i][j] is True and option[i][j] is False:
+                return False, 0
+            if subset[i][j] is False and option[i][j] is True:
+                rel *= (1 - reliability_matrix[i][j])
+    if rel >= 1:
+        raise Exception("Issue in PartOf")
+    return True, rel
 
 
-def get_reliability(reliability_matrix, option):
+def get_reliability(reliability_matrix, option, subsets):
     '''
     Returns the reliability of an option
     :param reliability_matrix:
     :param option:
+    :param subset: list of tuples with options and probability
     :return: reliability of an option
     '''
     ''' reliability = 0
@@ -124,13 +153,31 @@ def get_reliability(reliability_matrix, option):
     '''
 
     '''New reliability done by Andrei. We multiply every reliabilities.'''
-    reliability = 1
-    for i in range(len(reliability_matrix)):
-        for j in range(len(reliability_matrix[i])):
-            if option[i][j]:
-                reliability *= reliability_matrix[i][j]
+    # reliability = 1
+    # for i in range(len(reliability_matrix)):
+    #     for j in range(len(reliability_matrix[i])):
+    #         if option[i][j]:
+    #             reliability *= reliability_matrix[i][j]
+    #
+    # return reliability
 
+    '''New reliability done by Nitin. '''
+    valid, nodes = get_valid(option)
+    if not valid:
+        return 0
+
+    reliability = get_sub_reliability(reliability_matrix, option)
+    rel = reliability # Add to list later
+    for subset, sub_reliability in subsets:
+        is_subset, probability = part_of(subset, option, reliability_matrix)
+        if is_subset:
+            subset_reliability = (probability * sub_reliability)
+            reliability += subset_reliability
+            if reliability > 1:
+                raise Exception("Issue in get_reliability")
+    subsets.append((option, rel))
     return reliability
+
 
 
 
@@ -336,12 +383,13 @@ options = []
 for i in range(num_of_cities - 1, 0, -1):
     options = add_line(options, bool_combinations(i))
 options = [make_square_matrix(option, num_of_cities) for option in options]
-# print(len(options))
+print(len(options))
 
+subsets = []
 counter = 0
-for option in options:
+for option in reversed(options):
     cost = get_cost(cost_matrix, option)  # Get the cost of a design choice
-    reliability = get_reliability(reliability_matrix, option)  # Get reliability of a design choice
+    reliability = get_reliability(reliability_matrix, option, subsets)  # Get reliability of a design choice
     valid, nodes = get_valid(option)
     if valid:
         counter += 1
@@ -349,6 +397,7 @@ for option in options:
         print("Option: " + str(option))
         print(f"Valid: {valid}")
         print(f"Nodes: {nodes}")
+        print(f'Reliability: {reliability}')
         print("\n")
 
 print(f"Found {counter} valid options.")
