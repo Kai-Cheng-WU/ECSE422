@@ -387,17 +387,19 @@ print(len(options))
 
 subsets = []
 counter = 0
+cost_limit = 85
 for option in reversed(options):
     cost = get_cost(cost_matrix, option)  # Get the cost of a design choice
-    reliability = get_reliability(reliability_matrix, option, subsets)  # Get reliability of a design choice
     valid, nodes = get_valid(option)
-    if valid:
+    if valid and cost <= cost_limit:
         counter += 1
+        reliability = get_reliability(reliability_matrix, option, subsets)  # Get reliability of a design choice
         print(f"Valid Option {counter}:")
         print("Option: " + str(option))
         print(f"Valid: {valid}")
         print(f"Nodes: {nodes}")
         print(f'Reliability: {reliability}')
+        print(f'Cost:{cost}')
         print("\n")
 
 print(f"Found {counter} valid options.")
