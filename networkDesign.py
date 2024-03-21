@@ -31,7 +31,7 @@ def make_square_matrix(matrix1, size):
     return matrix1
 
 
-def print_matrix(matrix):
+def print_matrix(matrix, filler='---'):
     '''
     prints an n x n matrix in an easy to read format
     :param matrix: input n x n matrix
@@ -39,7 +39,7 @@ def print_matrix(matrix):
     '''
     for row in matrix:
         for el in row:
-            line = el if el else '---'
+            line = el if el is not None else filler
             print(line, end=' ')
         print()
 
@@ -328,13 +328,18 @@ def print_output(option):
 
 
 
-
 filename = '4_city.txt'
-if len(sys.argv) > 2:
+cost_limit = 85
+verbose = False
+if len(sys.argv) > 4:
     print("Too many arguments.")
     exit(-1)
-if len(sys.argv) == 2:
+if len(sys.argv) > 1:  # First argument is filename
     filename = sys.argv[1]
+if len(sys.argv) > 2:  # Second argument is cost limit
+    cost_limit = sys.argv[2]
+if len(sys.argv) > 3:  # Third argument is verbose
+    verbose = sys.argv[3]
 
 
 # Input variables
@@ -383,26 +388,38 @@ options = []
 for i in range(num_of_cities - 1, 0, -1):
     options = add_line(options, bool_combinations(i))
 options = [make_square_matrix(option, num_of_cities) for option in options]
-print(len(options))
+print("Number of configurations:", len(options))
 
 subsets = []
 counter = 0
-cost_limit = 85
+best_reliability = 0
+best_cost = 0
+best_option = None
+print("Finding the best configuration for a maximum cost of ", cost_limit)
+
 for option in reversed(options):
     cost = get_cost(cost_matrix, option)  # Get the cost of a design choice
     valid, nodes = get_valid(option)
     if valid and cost <= cost_limit:
         counter += 1
         reliability = get_reliability(reliability_matrix, option, subsets)  # Get reliability of a design choice
-        print(f"Valid Option {counter}:")
-        print("Option: " + str(option))
-        print(f"Valid: {valid}")
-        print(f"Nodes: {nodes}")
-        print(f'Reliability: {reliability}')
-        print(f'Cost:{cost}')
-        print("\n")
+        if best_reliability < reliability:
+            best_reliability = reliability
+            best_cost = cost
+            best_option = option
+        if verbose:
+            print(f"Valid Option {counter}:")
+            print("Option: " + str(option))
+            print(f"Valid: {valid}")
+            print(f"Nodes: {nodes}")
+            print(f'Reliability: {reliability}')
+            print(f'Cost:{cost}')
+            print("\n")
 
 print(f"Found {counter} valid options.")
+print(f'Best Reliability: {best_reliability}')
+print("Best Cost: ", best_cost)
+print_matrix(best_option, "-----")
 
 # op = [[None, False, True, True], [None, None, True, True], [None, None, None, True], [None, None, None, None]]
 # print(get_valid(op))
