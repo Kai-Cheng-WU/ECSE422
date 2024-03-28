@@ -53,16 +53,56 @@ def make_dict(cr_matrix):
 
     return result_dictionary
 
-def order_dict(cr_dict):
-    cr_dict = sorted(cr_dict.items(), key=lambda x: x[1])
+def order_dict(cr_dict,rev=False):
+    cr_dict = sorted(cr_dict.items(), key=lambda x: x[1],reverse=rev)
     sortdict = dict(cr_dict)
-    print(sortdict)
+    # print(sortdict)
+    return sortdict
 
 def primm_algo(matrix):
     '''
     input: the cost or reliability matrix
     :return: MST
     '''
+    target = num_of_cities
+    present = []
+    added = []
+    unadded = []
+    for edge, _ in matrix.items():
+        if len(present) == target:
+            return added
+        a, b = edge
+        if len(present) == 0: # Add the first edge
+            present.append(a)
+            present.append(b)
+            added.append(edge)
+            continue
+        if a in present and b in present:
+            continue
+        if a in present and b not in present:
+            present.append(b)
+            added.append(edge)
+            continue
+        if a not in present and b in present:
+            present.append(a)
+            added.append(edge)
+            continue
+        # If neither present
+        for uedge in unadded:
+            x, y = uedge
+            if x in present and y not in present:
+                present.append(y)
+                added.append(uedge)
+                unadded.remove(uedge)
+                continue
+            if x not in present and y in present:
+                present.append(x)
+                added.append(edge)
+                added.append(uedge)
+                unadded.remove(uedge)
+                continue
+        unadded.append(edge)
+    return added
 
 def detect_loop(config):
     '''
@@ -148,9 +188,13 @@ print_matrix(reliability_matrix)
 print("Cost Matrix: \n")
 print_matrix(cost_matrix)
 
-dict1 = make_dict(cost_matrix)
-print(dict1)
-ordered = order_dict(dict1)
-print(ordered)
-#make_dict(reliability_matrix)
-#order_matrix()
+cost_dict = make_dict(cost_matrix)
+cost_dict = order_dict(cost_dict)
+print(cost_dict)
+print(primm_algo(cost_dict))
+
+
+reliability_dict = make_dict(reliability_matrix)
+reliability_dict = order_dict(reliability_dict)
+print(reliability_dict)
+print(primm_algo(reliability_dict))
