@@ -45,10 +45,18 @@ def print_matrix(matrix, filler='---'):
 
 def make_dict(cr_matrix):
     # output as dictionary
-    pass
+    result_dictionary = {}
+    for i in range(len(cr_matrix)):
+        for j in range(len(cr_matrix[i])):
+            if cr_matrix[i][j]:
+                result_dictionary.update({(i+1,j+1) : cr_matrix[i][j]})
 
-def order_matrix(cr_matrix):
-    pass
+    return result_dictionary
+
+def order_dict(cr_dict):
+    cr_dict = sorted(cr_dict.items(), key=lambda x: x[1])
+    sortdict = dict(cr_dict)
+    print(sortdict)
 
 def primm_algo(matrix):
     '''
@@ -140,7 +148,9 @@ print_matrix(reliability_matrix)
 print("Cost Matrix: \n")
 print_matrix(cost_matrix)
 
-make_dict(cost_matrix)
-order_matrix()
-make_dict(reliability_matrix)
-order_matrix()
+dict1 = make_dict(cost_matrix)
+print(dict1)
+ordered = order_dict(dict1)
+print(ordered)
+#make_dict(reliability_matrix)
+#order_matrix()
