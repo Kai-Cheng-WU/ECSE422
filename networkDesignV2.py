@@ -1,47 +1,5 @@
 import sys
-import queue
-import copy
-
-def get_next_line(f):
-    '''
-    Gets the next line in the file that is not a comment
-    :param f: File descriptor object
-    :return: type(str) next line in the
-    '''
-    line = f.readline()
-    while line[0] == '#':
-        line = f.readline()
-    return line
-
-
-def make_square_matrix(matrix1, size):
-    '''
-    Transforms an incomplete matrix into a square matrix
-    eg [1,1,1], [1,1], [1]  --> [-,1,1,1], [-,-,1,1], [-,-,-,1], [-,-,-,-]
-    :param matrix1: The input incomplete matrix
-    :param size: size of the final matrix/ the number of cities
-    :return: n x n matrix that has the same information as the the input matrix
-    only half (triangular part) of the matrix is filled in
-    '''
-    matrix1.append([])
-    for i in range(size):
-        line = [None for x in range(i + 1)]
-        line.extend(matrix1[i])
-        matrix1[i] = line
-    return matrix1
-
-
-def print_matrix(matrix, filler='---'):
-    '''
-    prints an n x n matrix in an easy to read format
-    :param matrix: input n x n matrix
-    :return:
-    '''
-    for row in matrix:
-        for el in row:
-            line = el if el is not None else filler
-            print(line, end=' ')
-        print()
+from helper import *
 
 def make_dict(cr_matrix):
     # output as dictionary
@@ -104,13 +62,6 @@ def primm_algo(matrix):
         unadded.append(edge)
     return added
 
-def detect_loop(config):
-    '''
-    :param config:
-    :return:
-    '''
-    pass
-
 def augment(config, cr_matrix):
     '''
     :param config:
@@ -119,20 +70,6 @@ def augment(config, cr_matrix):
     '''
     pass
 
-def get_cost(cost_matrix, option):
-    '''
-    Returns the cost of a design option
-    :param cost_matrix:
-    :param option:
-    :return: the cost as an int
-    '''
-    cost_option = 0
-    for i in range(len(cost_matrix)):
-        for j in range(len(cost_matrix[i])):
-            if option[i][j]:
-                cost_option += cost_matrix[i][j]
-
-    return cost_option
 
 filename = '4_city.txt'
 cost_limit = 85
