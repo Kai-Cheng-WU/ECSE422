@@ -271,7 +271,7 @@ def get_cost_edges(edges, cost_matrix, n):
     :param n: number of cities
     :return:
     '''
-    return get_cost(convert_to_matrix(edges, n), cost_matrix)
+    return get_cost(cost_matrix, convert_to_matrix(edges, n))
 
 def print_output(option):
     '''
