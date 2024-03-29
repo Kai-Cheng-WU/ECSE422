@@ -3,6 +3,12 @@ from helper import *
 
 
 def make_dict(cr_matrix):
+    '''
+    Takes a cost or reliability matrix and turns it into a dictionary.
+    The keys are the edges as vertices pairs and the cost or reliability as values
+    :param cr_matrix: Cost or reliability matrix
+    :return: dictionary representation of the matrix
+    '''
     # output as dictionary
     result_dictionary = {}
     for i in range(len(cr_matrix)):
@@ -14,6 +20,12 @@ def make_dict(cr_matrix):
 
 
 def order_dict(cr_dict, rev=False):
+    '''
+    Orders the dictionary
+    :param cr_dict: cost or reliability matrix
+    :param rev: if True, descending order, if False, ascending order
+    :return: The dictionary ordered according to the costs or reliability
+    '''
     cr_dict = sorted(cr_dict.items(), key=lambda x: x[1], reverse=rev)
     sortdict = dict(cr_dict)
     # print(sortdict)
@@ -68,7 +80,10 @@ def primm_algo(matrix):
 
 def augment(config, cr_matrix):
     '''
-    :param config:
+    NOTE:The configuration is not passed as a matrix. For it to be in matrix, you can use the helper.convert_to_matrix()
+    Example input: [(0, 3), (1, 3), (1, 2)]
+    Takes the current configuration and the cost or reliability matrix and returns it with the next best edge added
+    :param config: The configuration
     :param cr_matrix: cost or reliability matrix
     :return: new config
     '''

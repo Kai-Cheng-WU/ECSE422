@@ -80,7 +80,6 @@ def add_line(bool_matrix_list, new_lines):
     return to_return
 
 
-# TODO
 def get_cost(cost_matrix, option):
     '''
     Returns the cost of a design option
@@ -97,7 +96,6 @@ def get_cost(cost_matrix, option):
     return cost_option
 
 
-# Can change signature
 def get_sub_reliability(reliability_matrix, option):
     reliability = 1
     for i in range(len(reliability_matrix)):
@@ -171,6 +169,12 @@ stringdic = {1: ['0', '1']}
 
 
 def getStrings(n):
+    '''
+    Returns a list of strings of all binary numbers of length n
+    Each binary number represents if an edge is active or not
+    :param n: number of edges
+    :return: list of strings
+    '''
     if n in stringdic:
         return stringdic[n]
     if n == 0:
@@ -186,6 +190,12 @@ def getStrings(n):
 
 
 def getSituation(config, s):
+    '''
+    Takes a configuration matrix and a binary string and returns a matrix with the '0' edges set to False
+    :param config: the configuration matrix
+    :param s: String representation of a binary number
+    :return: a matrix with the edges set to false according to s
+    '''
     index = 0
     size = len(config)
     matr = [[None for i in range(size)] for j in range(size)]
@@ -200,6 +210,13 @@ def getSituation(config, s):
 
 
 def get_prob(edges, s):
+    '''
+    Takes all the edges present in a configuration and gets the probability of the current situation represented by s.
+    In s, if '0' then the edge is down, if '1' then the edge is up
+    :param edges: list of probabilities representing all the edges in the configuration
+    :param s: string representation of a binary number indicating edges working or not
+    :return:
+    '''
     p = 1
     for index, present in enumerate(s):
         if present == '1':
@@ -210,6 +227,12 @@ def get_prob(edges, s):
 
 
 def getProbability(config, reliability_matrix):
+    '''
+    Takes a configuration and a reliabilty matrix and returns the reliability
+    :param config:
+    :param reliability_matrix:
+    :return: total all network reliability
+    '''
     edges = []
     size = len(config)
     for i in range(size):
@@ -224,7 +247,13 @@ def getProbability(config, reliability_matrix):
             p += get_prob(edges, s)
     return p
 
-def convert_to_matrix(edges,n):
+def convert_to_matrix(edges, n):
+    '''
+    Takes a list of edges in the form [(0, 3), (1, 3), (1, 2)] and converts them into a config matrix
+    :param edges: list of edges in the form [(0, 3), (1, 3), (1, 2)]
+    :param n: number of cities  OR size of the matrix
+    :return:
+    '''
     to_ret = [[None for i in range(n)] for j in range(n)]
     for i in range(n):
         for j in range(i+1,n):
@@ -235,6 +264,13 @@ def convert_to_matrix(edges,n):
     return to_ret
 
 def get_cost_edges(edges, cost_matrix, n):
+    '''
+    Get the cost of edges when the edges are in the form [(0, 3), (1, 3), (1, 2)]
+    :param edges: list of edges in the form [(0, 3), (1, 3), (1, 2)]
+    :param cost_matrix:
+    :param n: number of cities
+    :return:
+    '''
     return get_cost(convert_to_matrix(edges, n), cost_matrix)
 
 def print_output(option):
