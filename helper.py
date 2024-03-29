@@ -224,6 +224,18 @@ def getProbability(config, reliability_matrix):
             p += get_prob(edges, s)
     return p
 
+def convert_to_matrix(edges,n):
+    to_ret = [[None for i in range(n)] for j in range(n)]
+    for i in range(n):
+        for j in range(i+1,n):
+            to_ret[i][j] = False
+    for edge in edges:
+        i,j=edge
+        to_ret[i][j] = True
+    return to_ret
+
+def get_cost_edges(edges, cost_matrix, n):
+    return get_cost(convert_to_matrix(edges, n), cost_matrix)
 
 def print_output(option):
     '''
