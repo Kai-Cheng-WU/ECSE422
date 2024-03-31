@@ -95,7 +95,7 @@ def augment(config, reliability_matrix, cost_matrix, cost_limit, number_cities):
     cost_now = get_cost_edges(config,cost_matrix,number_cities)
     print(cost_now)
 
-    dict_remaining = {}
+    '''dict_remaining = {}
 
     for i in range(len(config_init_matrix)):
         for j in range(len(config_init_matrix[i])):
@@ -107,7 +107,7 @@ def augment(config, reliability_matrix, cost_matrix, cost_limit, number_cities):
         list_remaining.append(dict_remaining[key])
         list_remaining.sort()
     print(list_remaining)
-
+'''
 
     '''while sum of first i of list_remaining are less than cost_now:
             if i = 1 then
@@ -124,6 +124,7 @@ def augment(config, reliability_matrix, cost_matrix, cost_limit, number_cities):
                 check the best
             if i = 3 then
                 go triple by triple which won't happen
+    '''
     '''
     int_to_add = 1
     for i in range(1,len(list_remaining)):
@@ -154,31 +155,38 @@ def augment(config, reliability_matrix, cost_matrix, cost_limit, number_cities):
                         best_j = key[0]
                         best_k = key[1]
 
-                '''           
-                for j in range(len(config_init_matrix)):
-                for k in range(len(config_init_matrix[j])):
-                    # If an edge not added
-                    if config_init_matrix[i][j] == False:
-                        # Create dummy for reliability analysis
-                        dummy_config = []
-                        for element in config:
-                            dummy_config.append(element)
-                        current_best_reliability = (reliability_matrix[j][k]) * helper.getProbability(
-                            dummy_config.append((j, k)), reliability_matrix) + (
-                                                               1 - (reliability_matrix[i][j])) * helper.getProbability(
-                            dummy_config, reliability_matrix)
-                        if current_best_reliability > best_reliability:
-                            best_reliability = current_best_reliability
-                            best_j = j
-                            best_k = k
-            '''
-        if best_j != -1 and best_k != -1:
-            result.append((best_j, best_k))
-            config.append((best_j, best_k))
-            print(config)
-            print("bound")
-            return config
+                '''
+
+    best_reliability = 0.0
+    best_j = -1
+    best_k = -1
+    for j in range(len(config_init_matrix)):
+        for k in range(len(config_init_matrix[j])):
+            # If an edge not added
+            if config_init_matrix[j][k] == False:
+                if cost_matrix[j][k] < (cost_limit - cost_now):
+                    # Create dummy for reliability analysis
+                    dummy_config = []
+                    for element in config:
+                        dummy_config.append(element)
+                    dummy_config.append((j, k))
+                    print(dummy_config)
+
+                    current_best_reliability = (reliability_matrix[j][k]) * helper.getProbability(
+                        helper.convert_to_matrix(dummy_config,number_cities), reliability_matrix) + (
+                                                           1 - (reliability_matrix[j][k])) * helper.getProbability(
+                        helper.convert_to_matrix(dummy_config,number_cities), reliability_matrix)
+                    if current_best_reliability > best_reliability:
+                        best_reliability = current_best_reliability
+                        best_j = j
+                        best_k = k
+
+    if best_j != -1 and best_k != -1:
+        config.append((best_j, best_k))
+        print(config)
+        print("bound")
         return config
+    return config
 
 
 
@@ -244,8 +252,8 @@ def augment(config, reliability_matrix, cost_matrix, cost_limit, number_cities):
 
 
 
-filename = '6_city.txt'
-cost_limit = 65
+filename = '5_city.txt'
+cost_limit = 70
 verbose = False
 if len(sys.argv) > 4:
     print("Too many arguments.")
