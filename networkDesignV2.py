@@ -93,7 +93,7 @@ def augment_cost(config, c_dict):
             config.append(edge)
             return config
 
-def augment_reliability(config, r_matrix):
+def augment_reliability(config, r_dict):
     '''
     NOTE:The configuration is not passed as a matrix. For it to be in matrix, you can use the helper.convert_to_matrix()
     Example input: [(0, 3), (1, 3), (1, 2)]
@@ -102,6 +102,11 @@ def augment_reliability(config, r_matrix):
     :param r_matrix: reliability matrix
     :return: new config
     '''
+    config_set = set(config)
+    for edge, cost in r_dict.items():
+        if edge not in config_set:
+            config.append(edge)
+            return config
     pass
 
 
@@ -161,7 +166,7 @@ print_matrix(cost_matrix)
 # Get the best for cost
 # Make the MST
 cost_dictionary = make_dict(cost_matrix)
-cost_dictionary = order_dict(cost_dictionary)
+cost_dictionary = order_dict(cost_dictionary, False)
 cost_mst = primm_algo(cost_dictionary)
 best_cost_config = cost_mst
 # continue until you add the max edges greedily according to cost
@@ -180,7 +185,7 @@ reliability_with_cost_approach = getProbability(convert_to_matrix(best_cost_conf
 # Get the best for reliability
 # Make MST
 reliability_dictionary = make_dict(reliability_matrix)
-reliability_dictionary = order_dict(reliability_dictionary)
+reliability_dictionary = order_dict(reliability_dictionary, True)
 reliability_mst = primm_algo(reliability_dictionary)
 best_reliability_config = reliability_mst
 # continue until you add the max edges greedily according to cost
