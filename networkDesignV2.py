@@ -103,11 +103,23 @@ def augment_reliability(config, r_dict):
     :return: new config
     '''
     config_set = set(config)
+    candidates = []
     for edge, cost in r_dict.items():
         if edge not in config_set:
-            config.append(edge)
-            return config
-    pass
+            candidate = copy.deepcopy(config)
+            candidate.append(edge)
+            candidates.append(candidate)
+
+    if candidates.count == 0:
+        return config
+    
+    best_candidate = candidates[0]
+    for curr in candidates:
+        # print(f"Config: {config}")
+        # print(f"Current: {curr}")
+        if getProbability(convert_to_matrix(curr, num_of_cities), reliability_matrix) > getProbability(convert_to_matrix(best_candidate, num_of_cities), reliability_matrix):
+            best_candidate = curr
+    return best_candidate
 
 
 filename = '4_city.txt'
