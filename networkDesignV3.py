@@ -170,10 +170,11 @@ def augment(config, reliability_matrix, cost_matrix, cost_limit, number_cities):
                     for element in config:
                         dummy_config.append(element)
                     dummy_config.append((j, k))
-                    print(dummy_config)
+                    new_dummy_config = dummy_config
+                    print(new_dummy_config)
 
                     current_best_reliability = (reliability_matrix[j][k]) * helper.getProbability(
-                        helper.convert_to_matrix(dummy_config,number_cities), reliability_matrix) + (
+                        helper.convert_to_matrix(new_dummy_config,number_cities), reliability_matrix) + (
                                                            1 - (reliability_matrix[j][k])) * helper.getProbability(
                         helper.convert_to_matrix(dummy_config,number_cities), reliability_matrix)
                     if current_best_reliability > best_reliability:
@@ -253,7 +254,7 @@ def augment(config, reliability_matrix, cost_matrix, cost_limit, number_cities):
 
 
 filename = '5_city.txt'
-cost_limit = 70
+cost_limit = 60
 verbose = False
 if len(sys.argv) > 4:
     print("Too many arguments.")
