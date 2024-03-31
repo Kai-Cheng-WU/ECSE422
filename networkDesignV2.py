@@ -172,8 +172,6 @@ best_cost_config = cost_mst
 # continue until you add the max edges greedily according to cost
 greedy_cost_with_cost_approach = get_cost_edges(best_cost_config, cost_matrix, num_of_cities)
 while greedy_cost_with_cost_approach < cost_limit:
-    print(best_cost_config)
-    print(cost_dictionary)
     new_best_cost_config = augment_cost(best_cost_config, cost_dictionary)
     new_cost = get_cost_edges(new_best_cost_config, cost_matrix, num_of_cities)
     if new_cost > cost_limit:
