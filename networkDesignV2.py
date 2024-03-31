@@ -78,13 +78,28 @@ def primm_algo(matrix):
     return added
 
 
-def augment(config, cr_matrix):
+def augment_cost(config, c_dict):
     '''
     NOTE:The configuration is not passed as a matrix. For it to be in matrix, you can use the helper.convert_to_matrix()
     Example input: [(0, 3), (1, 3), (1, 2)]
-    Takes the current configuration and the cost or reliability matrix and returns it with the next best edge added
+    Takes the current configuration and the cost matrix and returns it with the next best edge added
     :param config: The configuration
-    :param cr_matrix: cost or reliability matrix
+    :param c_matrix: cost matrix
+    :return: new config
+    '''
+    config_set = set(config)
+    for edge, cost in c_dict.items():
+        if edge not in config_set:
+            config.append(edge)
+            return config
+
+def augment_reliability(config, r_matrix):
+    '''
+    NOTE:The configuration is not passed as a matrix. For it to be in matrix, you can use the helper.convert_to_matrix()
+    Example input: [(0, 3), (1, 3), (1, 2)]
+    Takes the current configuration and the reliability matrix and returns it with the next best edge added
+    :param config: The configuration
+    :param r_matrix: reliability matrix
     :return: new config
     '''
     pass
@@ -152,7 +167,9 @@ best_cost_config = cost_mst
 # continue until you add the max edges greedily according to cost
 greedy_cost_with_cost_approach = get_cost_edges(best_cost_config, cost_matrix, num_of_cities)
 while greedy_cost_with_cost_approach < cost_limit:
-    new_best_cost_config = augment(best_cost_config, cost_dictionary)
+    print(best_cost_config)
+    print(cost_dictionary)
+    new_best_cost_config = augment_cost(best_cost_config, cost_dictionary)
     new_cost = get_cost_edges(new_best_cost_config, cost_matrix, num_of_cities)
     if new_cost > cost_limit:
         break
@@ -169,7 +186,7 @@ best_reliability_config = reliability_mst
 # continue until you add the max edges greedily according to cost
 greedy_cost_with_rel_approach = get_cost_edges(best_reliability_config, cost_matrix, num_of_cities)
 while greedy_cost_with_rel_approach < cost_limit:
-    new_best_reliability_config = augment(best_reliability_config, reliability_dictionary)
+    new_best_reliability_config = augment_reliability(best_reliability_config, reliability_dictionary)
     new_cost = get_cost_edges(new_best_reliability_config, cost_matrix, num_of_cities)
     if new_cost > cost_limit:
         break
