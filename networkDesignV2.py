@@ -263,7 +263,7 @@ best_cr_config = reliability_mst
 # continue until you add the max edges greedily according to cost
 greedy_cost_with_rel_approach = get_cost_edges(best_reliability_config, cost_matrix, num_of_cities)
 while greedy_cost_with_rel_approach <= cost_limit:
-    new_best_reliability_config = augment_reliability(best_reliability_config, reliability_dictionary, cost_limit)
+    new_best_reliability_config = augment_reliability_per_cost(best_reliability_config, reliability_dictionary, cost_dictionary, cost_limit)
     new_cost = get_cost_edges(new_best_reliability_config, cost_matrix, num_of_cities)
     if new_cost > cost_limit:
         break
