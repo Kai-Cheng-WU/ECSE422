@@ -299,10 +299,16 @@ elif best == reliability_with_cost_approach:
     print("Cost FTW")
     print(f'Best Reliability: {reliability_with_cost_approach}')
     print("Best Cost: ", greedy_cost_with_cost_approach)
-    print_matrix(convert_to_matrix(best_cost_config, num_of_cities), "-----")
-    print_matrix(convert_to_matrix(primm_algo(cost_dictionary), num_of_cities), "-----")
+    print_matrix(convert_to_matrix(best_cost_config,num_of_cities), "-----")
 else:
     print("Reliability/Cost FTW")
     print(f'Best Reliability: {reliability_with_cr_approach}')
     print("Best Cost: ", greedy_cost_with_rel_approach)
     print_matrix(convert_to_matrix(best_cr_config, num_of_cities), "-----")
+
+# print("Cost MST: ")
+# print_matrix(convert_to_matrix(primm_algo(cost_dictionary), num_of_cities), "-----")
+# print("Reliability MST: ")
+# print_matrix(convert_to_matrix(primm_algo(reliability_dictionary), num_of_cities), "-----")
+# print("Reliability/Cost MST: ")
+# print_matrix(convert_to_matrix(primm_algo(order_dict_rel_per_cost(reliability_dictionary, cost_dictionary)), num_of_cities), "-----")
