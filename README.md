@@ -22,6 +22,11 @@ python networkDesign.py input_file.txt \
 OR \
 python3 networkDesign.py input_file.txt
 
+# TODO
+
+Provide a very detailed README. It should give me precise step-by-step instructions.
+Provide a sample execution trace for each input files and for the two different versions.
+
 ## Exhaustive Enumeration
 The first thing that we do for exhaustive enumeration is to collect the inputs from the command line. The first input is the filename, the second is the cost limit (we will consider a <= case) and the third is verbose which if set to True, it will print all the valid options we have for exhaustive enumeration (i.e those that all cities are connected). A verbose set to False only outputs the best optimal option for exhaustive enumeration. Then, we will parse the file inputed by extracting the number of cities, by creating a list of reliability and by creating a list of cost. Then, we will convert those into square matrices. The matrices will contain values in the upper triangular part and dashes on the lower triangular part.
 
