@@ -287,17 +287,17 @@ def print_output(option):
         print("")
         print(" (Node 3) o               o (Node 4)")
 
-        if option[0][1]:
+        if option[0][1] == True:
             print("There is a connection between node 1 and node 2")
-        if option[0][2]:
+        if option[0][2] == True:
             print("There is a connection between node 1 and node 3")
-        if option[0][3]:
+        if option[0][3] == True:
             print("There is a connection between node 1 and node 4")
-        if option[1][2]:
+        if option[1][2] == True:
             print("There is a connection between node 2 and node 3")
-        if option[1][3]:
+        if option[1][3] == True:
             print("There is a connection between node 2 and node 4")
-        if option[2][3]:
+        if option[2][3] == True:
             print("There is a connection between node 3 and node 4")
 
     if len(option[0]) == 5:

@@ -26,8 +26,8 @@ def get_reliability(reliability_matrix, option, subsets):
     return reliability
 
 
-filename = '4_city.txt'
-cost_limit = 85
+filename = '6_city.txt'
+cost_limit = 65
 verbose = False
 if len(sys.argv) > 4:
     print("Too many arguments.")
@@ -117,4 +117,8 @@ for option in reversed(options):
 print(f"Found {counter} valid options.")
 print(f'Best Reliability: {best_reliability}')
 print("Best Cost: ", best_cost)
+print()
+print_output(best_option)
+print()
 print_matrix(best_option, "-----")
+
