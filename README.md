@@ -44,5 +44,17 @@ We will start from the first option [0,0,0,0,0,0] and move our way up. First, we
 
 The last input gives the output in a matrix form.
 
- 
+## Better Algorithm
+
+For the better algorithm, we did the same parsing as in the exhaustive enumeraion to get the cost and reliability matrices. 
+
+For the better algorithm, we combined three different heuristic ideas.
+
+The first one is a greedy by cost approach. First, we generate the MST by using Kruskal like in class. We ordered from smallest cost to highest cost and we create a MST without redundancy. After that, we decided to augment by always going with the one with the best cost.
+
+The second one is a greedy by reliability approach. First, we generate the MST by using Kruskal like in class. We ordered from highest reliability to lowest reliability and we create a MST without redundancy. After that, we decided to augment by always going with the one with the best reliability.
+
+The third one is a greed by best reliability to cost approach. First, we generate the MST by using Kruskal like in class. We ordered from highest to lowest reliability and we create a MST without redundancy. After, we decided to augment by the best one with reliability to cost ratio. 
+
+For each of these approaches we find the best probability like we did in part 1. After, we compare the best three results and we decide to work with the best approach which we will output. 
 
