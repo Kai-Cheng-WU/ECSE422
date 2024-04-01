@@ -31,6 +31,16 @@ def order_dict(cr_dict, rev=False):
     # print(sortdict)
     return sortdict
 
+def order_dict_rel_per_cost(rel_dict, cost_dict):
+
+    # Calculate reliability per cost
+    reliability_per_cost = {item: rel_dict[item] / cost_dict[item] for item in cost_dict}
+
+    # Sort rel_dict by reliability per cost ratio
+    sortdict = {k: v for k, v in sorted(rel_dict.items(), key=lambda item: reliability_per_cost[item[0]], reverse=True)}
+
+    return sortdict
+
 
 def primm_algo(matrix):
     '''
@@ -90,8 +100,9 @@ def augment_cost(config, c_dict):
     config_set = set(config)
     for edge, cost in c_dict.items():
         if edge not in config_set:
-            config.append(edge)
-            return config
+            new_config = copy.deepcopy(config)
+            new_config.append(edge)
+            return new_config
 
 def augment_reliability(config, r_dict, cost_limit):
     '''
@@ -118,6 +129,39 @@ def augment_reliability(config, r_dict, cost_limit):
         # print(f"Config: {config}")
         # print(f"Current: {curr}")
         if getProbability(convert_to_matrix(curr, num_of_cities), reliability_matrix) > getProbability(convert_to_matrix(best_candidate, num_of_cities), reliability_matrix) and get_cost_edges(curr, cost_matrix, num_of_cities) <= cost_limit:
+            best_candidate = curr
+    return best_candidate
+
+
+def augment_reliability_per_cost(config, r_dict, c_dict, cost_limit):
+    '''
+    NOTE:The configuration is not passed as a matrix. For it to be in matrix, you can use the helper.convert_to_matrix()
+    Example input: [(0, 3), (1, 3), (1, 2)]
+    Takes the current configuration and the reliability matrix and returns it with the next best edge added
+    :param config: The configuration
+    :param r_matrix: reliability matrix
+    :return: new config
+    '''
+    config_set = set(config)
+    candidates = []
+    for edge, cost in r_dict.items():
+        if edge not in config_set:
+            candidate = copy.deepcopy(config)
+            candidate.append(edge)
+            candidates.append(candidate)
+
+    if candidates.count == 0:
+        return config
+    
+    best_candidate = candidates[0]
+    for curr in candidates:
+        # print(f"Config: {config}")
+        # print(f"Current: {curr}")
+        currprob = getProbability(convert_to_matrix(curr, num_of_cities), reliability_matrix)
+        currcost = get_cost_edges(curr, cost_matrix, num_of_cities) 
+        prevprob = getProbability(convert_to_matrix(best_candidate, num_of_cities), reliability_matrix)
+        prevcost = get_cost_edges(best_candidate, cost_matrix, num_of_cities)
+        if currprob / currcost > prevprob / prevcost and get_cost_edges(curr, cost_matrix, num_of_cities) <= cost_limit:
             best_candidate = curr
     return best_candidate
 
@@ -184,7 +228,7 @@ cost_mst = primm_algo(cost_dictionary)
 best_cost_config = cost_mst
 # continue until you add the max edges greedily according to cost
 greedy_cost_with_cost_approach = get_cost_edges(best_cost_config, cost_matrix, num_of_cities)
-while greedy_cost_with_cost_approach <= cost_limit:
+while greedy_cost_with_cost_approach < cost_limit:
     new_best_cost_config = augment_cost(best_cost_config, cost_dictionary)
     new_cost = get_cost_edges(new_best_cost_config, cost_matrix, num_of_cities)
     if new_cost > cost_limit:
@@ -201,7 +245,7 @@ reliability_mst = primm_algo(reliability_dictionary)
 best_reliability_config = reliability_mst
 # continue until you add the max edges greedily according to cost
 greedy_cost_with_rel_approach = get_cost_edges(best_reliability_config, cost_matrix, num_of_cities)
-while greedy_cost_with_rel_approach <= cost_limit:
+while greedy_cost_with_rel_approach < cost_limit:
     new_best_reliability_config = augment_reliability(best_reliability_config, reliability_dictionary, cost_limit)
     new_cost = get_cost_edges(new_best_reliability_config, cost_matrix, num_of_cities)
     if new_cost > cost_limit:
@@ -210,17 +254,55 @@ while greedy_cost_with_rel_approach <= cost_limit:
     best_reliability_config = new_best_reliability_config
 reliability_with_reliability_approach = getProbability(convert_to_matrix(best_reliability_config,num_of_cities), reliability_matrix)
 
+# Get the best for rel/cost
+# Make MST
+reliability_dictionary = make_dict(reliability_matrix)
+reliability_dictionary = order_dict_rel_per_cost(reliability_dictionary, cost_dictionary)
+reliability_mst = primm_algo(reliability_dictionary)
+best_cr_config = reliability_mst
+# continue until you add the max edges greedily according to cost
+greedy_cost_with_rel_approach = get_cost_edges(best_reliability_config, cost_matrix, num_of_cities)
+while greedy_cost_with_rel_approach <= cost_limit:
+    new_best_reliability_config = augment_reliability(best_reliability_config, reliability_dictionary, cost_limit)
+    new_cost = get_cost_edges(new_best_reliability_config, cost_matrix, num_of_cities)
+    if new_cost > cost_limit:
+        break
+    greedy_cost_with_rel_approach = new_cost
+    best_reliability_config = new_best_reliability_config
+reliability_with_cr_approach = getProbability(convert_to_matrix(best_reliability_config,num_of_cities), reliability_matrix)
+
+
+
 if greedy_cost_with_rel_approach > cost_limit and greedy_cost_with_cost_approach > cost_limit:
     print("No result")
     exit()
 
-if reliability_with_reliability_approach > reliability_with_cost_approach or True:
+# if reliability_with_reliability_approach > reliability_with_cost_approach or True:
+#     print("Reliability FTW")
+#     print(f'Best Reliability: {reliability_with_reliability_approach}')
+#     print("Best Cost: ", greedy_cost_with_rel_approach)
+#     print_matrix(convert_to_matrix(best_reliability_config, num_of_cities), "-----")
+# else:
+#     print("Cost FTW")
+#     print(f'Best Reliability: {reliability_with_cost_approach}')
+#     print("Best Cost: ", greedy_cost_with_cost_approach)
+#     print_matrix(convert_to_matrix(best_cost_config,num_of_cities), "-----")
+
+best = max(reliability_with_reliability_approach, reliability_with_cost_approach, reliability_with_cr_approach)
+
+if best == reliability_with_reliability_approach:
     print("Reliability FTW")
     print(f'Best Reliability: {reliability_with_reliability_approach}')
     print("Best Cost: ", greedy_cost_with_rel_approach)
     print_matrix(convert_to_matrix(best_reliability_config, num_of_cities), "-----")
-else:
+elif best == reliability_with_cost_approach:
     print("Cost FTW")
     print(f'Best Reliability: {reliability_with_cost_approach}')
     print("Best Cost: ", greedy_cost_with_cost_approach)
-    print_matrix(convert_to_matrix(best_cost_config,num_of_cities), "-----")
+    print_matrix(convert_to_matrix(best_cost_config, num_of_cities), "-----")
+    print_matrix(convert_to_matrix(primm_algo(cost_dictionary), num_of_cities), "-----")
+else:
+    print("Reliability/Cost FTW")
+    print(f'Best Reliability: {reliability_with_cr_approach}')
+    print("Best Cost: ", greedy_cost_with_rel_approach)
+    print_matrix(convert_to_matrix(best_cr_config, num_of_cities), "-----")
