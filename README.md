@@ -63,3 +63,6 @@ The third one is a greed by best reliability to cost approach. First, we generat
 
 For each of these approaches we find the best probability like we did in part 1. After, we compare the best three results and we decide to work with the best approach which we will output. 
 
+## Interesting approach
+
+We decided to add three better algorithms for the better algorithm part since we might get better results than using only one
