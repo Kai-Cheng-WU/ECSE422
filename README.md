@@ -35,7 +35,7 @@ e.g.
 <br> -  - 5 
 <br> -  -  - 
 
-Then, we will generate all the options. We will start from all the edges not included and we will start to include edge by edge until we get to all edge selected. For example, if we have 4 cities, the first option will be [0,0,0,0,0,0], then [0,0,0,0,0,1], then [0,0,0,0,1,0], [0,0,0,0,1,1] and so on until [1,1,1,1,1,1]. Then, each option will be transformed into a matrix of booleans to indicate which edge is included. An edge not included is 0/False and an edge included is a 1/True. We fill with None the rest to get a nice matrix.
+Then, we will generate all the options. We will start from all the edges not included and we will start to include edge by edge until we get to all edge selected. For example, if we have 4 cities, the first option will be [[0,0,0],[0,0],[0]], then [[0,0,0],[0,0],[1]], then [[0,0,0],[0,1],[0]], [0,0,0,0,1,1] and so on until [[1,1,1],[1,1],[1]]. Then, each option will be transformed into a matrix of booleans to indicate which edge is included. An edge not included is 0/False and an edge included is a 1/True. We fill with None the rest to get a nice matrix.
 
 e.g 
 <br> None True False
