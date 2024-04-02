@@ -55,11 +55,11 @@ For the better algorithm, we did the same parsing as in the exhaustive enumeraio
 
 For the better algorithm, we combined three different heuristic ideas.
 
-The first one is a greedy by cost approach. First, we generate the MST by using Kruskal like in class. We ordered from smallest cost to highest cost and we create a MST without redundancy. After that, we decided to augment by always going with the one with the best cost.
+The first one is a greedy by cost approach. First, we generate the MST by using Kruskal like in class. We ordered from smallest cost to highest cost and we create a MST without redundancy. After that, we decided to augment by always going with the one with the best cost until the maximum cost limit is reached.
 
-The second one is a greedy by reliability approach. First, we generate the MST by using Kruskal like in class. From the MST, we compute the reliability of all possible graph with one additional edge and pick the best one and continue to expand it. We then iteratively augment the graph until we reach the maximum cost limit.
+The second one is a greedy by reliability approach. First, we generate the MST by using Kruskal like in class. From the MST, we compute the reliability of all possible graph with one additional edge and pick the one with the highest reliability and continue to expand it. We then iteratively augment the graph until we reach the maximum cost limit.
 
-The third one is a greed by best reliability to cost approach. First, we generate the MST by using Kruskal like in class. We ordered from highest to lowest reliability and we create a MST without redundancy. After, we decided to augment by the best one with reliability to cost ratio. 
+The third one is a greed by best reliability to cost approach. The idea is somewhat similar to the reliability approach. First, we generate the MST by using Kruskal like in class. We then compute the reliability of all possible graph with one additional edge, however, this time we would select the graph with the highest reliability to cost ratio and expand it from there. As before, we iteratively repeat this process until the maximum cost limit is reached. 
 
 For each of these approaches we find the best probability like we did in part 1. After, we compare the best three results and we decide to work with the best approach which we will output. 
 
