@@ -57,7 +57,7 @@ For the better algorithm, we combined three different heuristic ideas.
 
 The first one is a greedy by cost approach. First, we generate the MST by using Kruskal like in class. We ordered from smallest cost to highest cost and we create a MST without redundancy. After that, we decided to augment by always going with the one with the best cost.
 
-The second one is a greedy by reliability approach. First, we generate the MST by using Kruskal like in class. We ordered from highest reliability to lowest reliability and we create a MST without redundancy. After that, we decided to augment by always going with the one with the best reliability.
+The second one is a greedy by reliability approach. First, we generate the MST by using Kruskal like in class. From the MST, we compute the reliability of all possible graph with one additional edge and pick the best one and continue to expand it. We then iteratively augment the graph until we reach the maximum cost limit.
 
 The third one is a greed by best reliability to cost approach. First, we generate the MST by using Kruskal like in class. We ordered from highest to lowest reliability and we create a MST without redundancy. After, we decided to augment by the best one with reliability to cost ratio. 
 
