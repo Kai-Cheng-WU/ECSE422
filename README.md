@@ -3,7 +3,7 @@
 | Name | Student ID |
 |-----------------|-----------------|
 | Andrei Sandor | 260977451  |
-| Nitin Kaundun |   |
+| Nitin Kaundun |  260786113 |
 | Kaicheng Wu | 260892789 |
 
 
@@ -18,6 +18,7 @@ python3 --version
 
 
 ## To run the code: 
+### Version 1 - Brute Force 
 python networkDesign.py input_file.txt \
 OR \
 python3 networkDesign.py input_file.txt
