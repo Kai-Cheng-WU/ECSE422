@@ -1,6 +1,8 @@
 import sys
 from helper import *
+import time
 
+t1 = time.time()
 
 def make_dict(cr_matrix):
     '''
@@ -294,4 +296,5 @@ else:
     print(f'Best Reliability: {reliability_with_cr_approach}')
     print("Best Cost: ", greedy_cost_with_rel_approach)
     print_matrix(convert_to_matrix(best_cr_config, num_of_cities), "-----")
-    
+
+print(f'time taken: {(time.time() - t1)}')

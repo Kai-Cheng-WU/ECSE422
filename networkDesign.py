@@ -1,5 +1,8 @@
 import sys
 from helper import *
+import time
+
+t1 = time.time()
 
 
 def get_reliability(reliability_matrix, option, subsets):
@@ -7,7 +10,7 @@ def get_reliability(reliability_matrix, option, subsets):
     Returns the reliability of an option
     :param reliability_matrix:
     :param option:
-    :param subset: list of tuples with options and probability
+    :param subsets: list of tuples with options and probability
     :return: reliability of an option
     '''
     valid, nodes = get_valid(option)
@@ -78,6 +81,7 @@ print("Reliability Matrix: \n")
 print_matrix(reliability_matrix)
 print("Cost Matrix: \n")
 print_matrix(cost_matrix)
+print("Method: Brute force")
 
 # Listing all options
 # Each option is a matrix of boolean to indicate which edge is included
@@ -85,7 +89,7 @@ options = []
 for i in range(num_of_cities - 1, 0, -1):
     options = add_line(options, bool_combinations(i))
 options = [make_square_matrix(option, num_of_cities) for option in options]
-print("Number of configurations:", len(options))
+# print("Number of configurations:", len(options))
 
 subsets = []
 counter = 0
@@ -115,6 +119,11 @@ for option in reversed(options):
             print("\n")
 
 print(f"Found {counter} valid options.")
-print(f'Best Reliability: {best_reliability}')
-print("Best Cost: ", best_cost)
-print_matrix(best_option, "-----")
+if counter == 0:
+    print("Cost goal is infeasible")
+else:
+    print(f'Best Reliability: {best_reliability}')
+    print("Best Cost: ", best_cost)
+    print_matrix(best_option, "-----")
+
+print(f'time taken: {(time.time() - t1)}')
