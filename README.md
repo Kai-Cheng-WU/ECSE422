@@ -10,18 +10,45 @@
 ## Prerequisite:
 Any version of python
 ### Installation of Python3 for Mac OS Using Homebrew:
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
-brew install python 
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+brew install python` 
  
 Use the following command to make sure that python is installed: \
-python3 --version
+`python3 --version`
 
 
 ## To run the code: 
 ### Version 1 - Brute Force 
-python networkDesign.py input_file.txt \
+<p>The python script can be called without any command line argument.</p>
+
+`python networkDesign.py input_file.txt`\
 OR \
-python3 networkDesign.py input_file.txt
+`python3 networkDesign.py input_file.txt`
+
+<p>These arguments can also be passed in order. Otherwise, their value remains as default.</p>
+
+`python networkDesign.py input_file.txt cost_limit Verbose`\
+OR \
+`python3 networkDesign.py input_file.txt cost_limit Verbose`
+
+1. Input_file.txt - your input file with the configuration. **Default: 4_city.txt**
+2. cost_limit - an integer value which is the target goal for the cost. **Default: 85**
+3. Verbose - boolean value. If set to true, all the valid (cost within goal and Rall != 0) configurations are listed. If set to false, only the  best config is shown. **Default: False**
+
+### Version 2 - MST and augmentation
+<p>Same as before, the python script can be called with or without any command line argument.</p>
+
+`python networkDesignV2.py input_file.txt`\
+OR \
+`python3 networkDesignV2.py input_file.txt`
+
+<p>These arguments can also be passed in order. Otherwise, their value remains as default.</p>
+
+`python networkDesignV2.py input_file.txt cost_limit Verbose`\
+OR \
+`python3 networkDesignV2.py input_file.txt cost_limit Verbose`
+
+
 
 # TODO
 
