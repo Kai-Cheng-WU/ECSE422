@@ -48,7 +48,8 @@ OR \
 OR \
 `python3 networkDesignV2.py input_file.txt cost_limit Verbose`
 
-
+# Execution Traces
+The outputs of executions for the bruteforce algorithm can be found in the brute folder, version 2 in PrimmV2, version 3 in PrimmV3.
 
 # TODO
 
