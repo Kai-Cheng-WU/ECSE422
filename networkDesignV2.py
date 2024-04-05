@@ -273,20 +273,9 @@ reliability_with_cr_approach = getProbability(convert_to_matrix(best_reliability
 
 
 
-if greedy_cost_with_rel_approach > cost_limit and greedy_cost_with_cost_approach > cost_limit:
-    print("No result")
+if greedy_cost_with_rel_approach > cost_limit and greedy_cost_with_cost_approach > cost_limit and greedy_cost_with_rel_approach > cost_limit:
+    print("Infeasible :(")
     exit()
-
-# if reliability_with_reliability_approach > reliability_with_cost_approach or True:
-#     print("Reliability FTW")
-#     print(f'Best Reliability: {reliability_with_reliability_approach}')
-#     print("Best Cost: ", greedy_cost_with_rel_approach)
-#     print_matrix(convert_to_matrix(best_reliability_config, num_of_cities), "-----")
-# else:
-#     print("Cost FTW")
-#     print(f'Best Reliability: {reliability_with_cost_approach}')
-#     print("Best Cost: ", greedy_cost_with_cost_approach)
-#     print_matrix(convert_to_matrix(best_cost_config,num_of_cities), "-----")
 
 best = max(reliability_with_reliability_approach, reliability_with_cost_approach, reliability_with_cr_approach)
 
@@ -305,10 +294,4 @@ else:
     print(f'Best Reliability: {reliability_with_cr_approach}')
     print("Best Cost: ", greedy_cost_with_rel_approach)
     print_matrix(convert_to_matrix(best_cr_config, num_of_cities), "-----")
-
-# print("Cost MST: ")
-# print_matrix(convert_to_matrix(primm_algo(cost_dictionary), num_of_cities), "-----")
-# print("Reliability MST: ")
-# print_matrix(convert_to_matrix(primm_algo(reliability_dictionary), num_of_cities), "-----")
-# print("Reliability/Cost MST: ")
-# print_matrix(convert_to_matrix(primm_algo(order_dict_rel_per_cost(reliability_dictionary, cost_dictionary)), num_of_cities), "-----")
+    
