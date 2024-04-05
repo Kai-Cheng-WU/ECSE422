@@ -1,0 +1,23 @@
+Reading 4_city.txt.
+
+Number of cities: 4
+Reliability Matrix: 
+
+--- 0.94 0.9 0.94 
+--- --- 0.93 0.96 
+--- --- --- 0.91 
+--- --- --- --- 
+Cost Matrix: 
+
+--- 15 20 10 
+--- --- 15 10 
+--- --- --- 20 
+--- --- --- --- 
+Reliability FTW
+Best Reliability: 0.9442944
+Best Cost:  60
+----- True True False 
+----- ----- True True 
+----- ----- ----- False 
+----- ----- ----- ----- 
+time taken: 0.013589143753051758
