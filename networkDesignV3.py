@@ -357,12 +357,12 @@ reliability_with_reliability_approach = getProbability(convert_to_matrix(best_re
 #    exit()
 
 if reliability_with_reliability_approach > reliability_with_cost_approach:
-    print("Reliability FTW")
+    print("Best Method: Reliability.")
     print(f'Best Reliability: {reliability_with_reliability_approach}')
     print("Best Cost: ", get_cost_edges(best_reliability_config,cost_matrix,num_of_cities))
     print_matrix(convert_to_matrix(best_reliability_config, num_of_cities), "-----")
 else:
-    print("Cost FTW")
+    print("Best Method: Cost.")
     print(f'Best Reliability: {reliability_with_cost_approach}')
     print("Best Cost: ", get_cost_edges(best_cost_config,cost_matrix,num_of_cities))
     print_matrix(convert_to_matrix(best_cost_config,num_of_cities), "-----")

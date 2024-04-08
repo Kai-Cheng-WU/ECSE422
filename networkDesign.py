@@ -120,7 +120,7 @@ for option in reversed(options):
 
 print(f"Found {counter} valid options.")
 if counter == 0:
-    print("Cost goal is infeasible")
+    print("INFEASIBLE: Cost goal is infeasible")
 else:
     print(f'Best Reliability: {best_reliability}')
     print("Best Cost: ", best_cost)

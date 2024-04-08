@@ -221,6 +221,7 @@ print("Reliability Matrix: \n")
 print_matrix(reliability_matrix)
 print("Cost Matrix: \n")
 print_matrix(cost_matrix)
+print("Method: MST and Augmentation")
 
 # Get the best for cost
 # Make the MST
@@ -276,23 +277,23 @@ reliability_with_cr_approach = getProbability(convert_to_matrix(best_reliability
 
 
 if greedy_cost_with_rel_approach > cost_limit and greedy_cost_with_cost_approach > cost_limit and greedy_cost_with_rel_approach > cost_limit:
-    print("Infeasible :(")
+    print("INFEASIBLE: Cost goal is infeasible")
     exit()
 
 best = max(reliability_with_reliability_approach, reliability_with_cost_approach, reliability_with_cr_approach)
 
 if best == reliability_with_reliability_approach:
-    print("Reliability FTW")
+    print("Best Method: Reliability.")
     print(f'Best Reliability: {reliability_with_reliability_approach}')
     print("Best Cost: ", greedy_cost_with_rel_approach)
     print_matrix(convert_to_matrix(best_reliability_config, num_of_cities), "-----")
 elif best == reliability_with_cost_approach:
-    print("Cost FTW")
+    print("Best Method: Cost.")
     print(f'Best Reliability: {reliability_with_cost_approach}')
     print("Best Cost: ", greedy_cost_with_cost_approach)
     print_matrix(convert_to_matrix(best_cost_config,num_of_cities), "-----")
 else:
-    print("Reliability/Cost FTW")
+    print("Best Method: Reliability/Cost.")
     print(f'Best Reliability: {reliability_with_cr_approach}')
     print("Best Cost: ", greedy_cost_with_rel_approach)
     print_matrix(convert_to_matrix(best_cr_config, num_of_cities), "-----")
