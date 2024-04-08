@@ -67,17 +67,24 @@ The outputs of executions for the bruteforce algorithm can be found in txt form.
 2. Augmentation approach --> [MST_augment_V2](https://github.com/Kai-Cheng-WU/ECSE422/tree/main/MST_augment_V2) folder
 
 The files are named in this format: result_{Filename}_{cost}.txt.
-The command to get the text files are shown below.
+The command to get the text files are shown below.\
+![Exec brute](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/e340b171-cce1-4661-8cd9-f64c1d6c54e8)\
+![Exec MST](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/731b81e6-7c20-43b9-a3c0-57132f3ea055)
 
 Here is a screenshot showing the exhaustive enumeration approach output.
+![Brute_normal](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/28fc3d9a-ff44-406e-bf33-2e7b68f3390a)
 
 Here is a screenshot showing the exhaustive enumeration approach output with the verbose set to True.
+![Brute_verbose](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/fbed7d41-e07b-453b-8207-d877210bde54)
 
 Here is a screenshot showing the exhaustive enumeration approach output being infeasible.
+![Brute_Infeasible](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/61ae739f-045e-420c-af13-956a90d49584)
 
 Here is a screenshot showing the augmentation approach.
+![Augment_normal](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/b08deff8-b4cf-423d-9c40-41874c051793)
 
 Here is a screenshot showing the augmentation approach being infeasible.
+![Augment_Infeasible](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/e0ddf39b-9a76-4c33-8e3d-48787e73eb3e)
 
 ## [Exhaustive Enumeration](#Table-of-Content)
 The first thing that we do for exhaustive enumeration is to collect the inputs from the command line. The first input is the filename, the second is the cost limit (we will consider a <= case) and the third is verbose which if set to True, it will print all the valid options we have for exhaustive enumeration (i.e those that all cities are connected). A verbose set to False only outputs the best optimal option for exhaustive enumeration. Then, we will parse the file inputed by extracting the number of cities, by creating a list of reliability and by creating a list of cost. Then, we will convert those into square matrices. The matrices will contain values in the upper triangular part and dashes on the lower triangular part.
