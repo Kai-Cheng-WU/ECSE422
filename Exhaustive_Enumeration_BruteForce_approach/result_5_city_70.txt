@@ -1,0 +1,28 @@
+Reading 5_city.txt.
+
+Number of cities: 5
+Reliability Matrix: 
+
+--- 0.94 0.97 0.91 0.92 
+--- --- 0.94 0.9 0.94 
+--- --- --- 0.93 0.96 
+--- --- --- --- 0.91 
+--- --- --- --- --- 
+Cost Matrix: 
+
+--- 10 10 20 15 
+--- --- 20 10 10 
+--- --- --- 20 10 
+--- --- --- --- 20 
+--- --- --- --- --- 
+Method: Brute force
+Finding the best configuration for a maximum cost of  70
+Found 238 valid options.
+Best Reliability: 0.98755054608
+Best Cost:  70
+----- True True False False 
+----- ----- False True True 
+----- ----- ----- True True 
+----- ----- ----- ----- False 
+----- ----- ----- ----- ----- 
+time taken: 0.30342721939086914
