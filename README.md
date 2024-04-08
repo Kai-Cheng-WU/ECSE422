@@ -71,19 +71,19 @@ The command to get the text files are shown below.\
 ![Exec brute](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/e340b171-cce1-4661-8cd9-f64c1d6c54e8)\
 ![Exec MST](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/731b81e6-7c20-43b9-a3c0-57132f3ea055)
 
-Here is a screenshot showing the exhaustive enumeration approach output.
+Here is a screenshot showing the exhaustive enumeration approach output.\
 ![Brute_normal](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/28fc3d9a-ff44-406e-bf33-2e7b68f3390a)
 
-Here is a screenshot showing the exhaustive enumeration approach output with the verbose set to True.
+Here is a screenshot showing the exhaustive enumeration approach output with the verbose set to True.\
 ![Brute_verbose](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/fbed7d41-e07b-453b-8207-d877210bde54)
 
-Here is a screenshot showing the exhaustive enumeration approach output being infeasible.
+Here is a screenshot showing the exhaustive enumeration approach output being infeasible. \
 ![Brute_Infeasible](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/61ae739f-045e-420c-af13-956a90d49584)
 
-Here is a screenshot showing the augmentation approach.
+Here is a screenshot showing the augmentation approach. \
 ![Augment_normal](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/b08deff8-b4cf-423d-9c40-41874c051793)
 
-Here is a screenshot showing the augmentation approach being infeasible.
+Here is a screenshot showing the augmentation approach being infeasible. \
 ![Augment_Infeasible](https://github.com/Kai-Cheng-WU/ECSE422/assets/35270821/e0ddf39b-9a76-4c33-8e3d-48787e73eb3e)
 
 ## [Exhaustive Enumeration](#Table-of-Content)
