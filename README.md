@@ -7,12 +7,12 @@
 | Kaicheng Wu   | 260892789  |
 
 # Table of Content
-[Prerequisite](#Prerequisite) \
-[Step-by-step Instructions](#Step-by-step-Instructions) \
-[Execution Traces](#Execution-Traces) \
-[Exhaustive Enumeration](#Exhaustive-Enumeration) \
-[Better Algorithm](#Better-Algorithm) \
-[Submission](#Submission)
+### [Prerequisite](#Prerequisite) 
+### [Step-by-step Instructions](#Step-by-step-Instructions) 
+### [Execution Traces](#Execution-Traces) 
+### [Exhaustive Enumeration](#Exhaustive-Enumeration) 
+### [Better Algorithm](#Better-Algorithm) 
+### [Submission](#Submission)
 
 
 ## [Prerequisite](#Table-of-Content)
