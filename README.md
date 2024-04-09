@@ -6,6 +6,9 @@
 | Nitin Kaundun | 260786113  |
 | Kaicheng Wu   | 260892789  |
 
+# REPO LINK
+[ECSE 422](https://github.com/Kai-Cheng-WU/ECSE422/)
+
 # Table of Content
 ### [Prerequisite](#Prerequisite) 
 ### [Step-by-step Instructions](#Step-by-step-Instructions) 
